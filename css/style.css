@@ -1573,3 +1573,175 @@ h2 span {
 .giscus-host {
   margin-top: 16px;
 }
+
+/* Effects: toast, hearts, sparkles, floating buttons */
+.fx-toast {
+  position: fixed;
+  left: 50%;
+  bottom: 26px;
+  z-index: 100;
+  padding: 12px 20px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--bg-soft);
+  color: var(--text);
+  box-shadow: var(--shadow);
+  font-size: 0.9rem;
+  transform: translate(-50%, 20px);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+.fx-toast.is-visible {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+
+.fx-heart {
+  position: fixed;
+  z-index: 90;
+  color: var(--pink);
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  animation: fx-heart-fly 0.95s ease-out forwards;
+}
+
+@keyframes fx-heart-fly {
+  from {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(0.6);
+  }
+  to {
+    opacity: 0;
+    transform: translate(calc(-50% + var(--fx-x)), calc(-50% + var(--fx-y))) scale(1.25);
+  }
+}
+
+.fx-sparkle {
+  position: fixed;
+  z-index: 89;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #ffffff, rgba(255, 159, 207, 0));
+  pointer-events: none;
+  animation: fx-sparkle 0.7s ease-out forwards;
+}
+
+@keyframes fx-sparkle {
+  from {
+    opacity: 0.9;
+    transform: translate(-50%, -50%) scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: translate(calc(-50% + var(--fx-dx)), calc(-50% + var(--fx-dy))) scale(0);
+  }
+}
+
+.float-stack {
+  position: fixed;
+  left: 18px;
+  bottom: 18px;
+  z-index: 80;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.float-btn {
+  position: relative;
+  padding: 10px 18px;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  background: var(--panel);
+  color: var(--text);
+  font: inherit;
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: var(--shadow);
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.float-btn::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1.5px;
+  background: linear-gradient(120deg, var(--pink), var(--purple), #7fe0ff, #ffd27f);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  mask-composite: exclude;
+  pointer-events: none;
+  opacity: 0.8;
+}
+
+.float-btn:hover,
+.float-btn:focus-visible {
+  color: var(--pink);
+  transform: translateY(-1px);
+}
+
+.letter-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
+  margin-top: 16px;
+}
+
+.reason-today {
+  max-width: 620px;
+  margin: 16px auto 0;
+  padding: 22px 26px;
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  background: var(--panel);
+  color: var(--text);
+  font-size: 1.1rem;
+  line-height: 1.6;
+  text-align: center;
+}
+
+@media (max-width: 680px) {
+  .float-stack {
+    left: 12px;
+    bottom: 12px;
+  }
+}
+
+/* Print: just the letter, nothing else */
+@media print {
+  #starfield,
+  .site-header,
+  .site-footer,
+  .float-stack,
+  .back-to-top,
+  .letter-actions,
+  #reveal-letter,
+  .letter-footnote,
+  .center-link,
+  .fx-toast {
+    display: none !important;
+  }
+
+  body {
+    background: #ffffff;
+    color: #1a1a1a;
+  }
+
+  .letter-paper {
+    border: none;
+    box-shadow: none;
+    background: #ffffff;
+  }
+
+  .letter-content {
+    opacity: 1;
+    transform: none;
+  }
+}

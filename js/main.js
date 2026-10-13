@@ -163,19 +163,76 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // Love-letter reveal.
+  // Love-letter reveal (with a gentle typewriter).
   const revealButton = document.getElementById("reveal-letter");
   const letterContent = document.getElementById("letter-content");
 
   if (revealButton && letterContent) {
-    revealButton.addEventListener("click", () => {
+    const paragraphs = Array.from(letterContent.querySelectorAll("p"));
+    const reduceType = window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches;
+
+    paragraphs.forEach((p) => {
+      p.dataset.full = p.textContent;
+    });
+
+    let typing = false;
+
+    function playRevealAnimation() {
       letterContent.classList.remove("is-revealing");
-
-      // Restart the animation when the button is clicked again.
       void letterContent.offsetWidth;
-
       letterContent.classList.add("is-revealing");
-      revealButton.textContent = "Read it again ♡";
+    }
+
+    function typeAll() {
+      typing = true;
+      revealButton.disabled = true;
+      const texts = paragraphs.map((p) => p.dataset.full);
+      paragraphs.forEach((p) => {
+        p.textContent = "";
+      });
+
+      let paragraphIndex = 0;
+      let charIndex = 0;
+
+      function tick() {
+        if (paragraphIndex >= paragraphs.length) {
+          typing = false;
+          revealButton.disabled = false;
+          revealButton.textContent = "Read it again \u2661";
+          return;
+        }
+
+        const full = texts[paragraphIndex];
+        const step = 2 + Math.floor(Math.random() * 3);
+        charIndex = Math.min(charIndex + step, full.length);
+        paragraphs[paragraphIndex].textContent = full.slice(0, charIndex);
+
+        if (charIndex >= full.length) {
+          paragraphIndex += 1;
+          charIndex = 0;
+        }
+
+        window.setTimeout(tick, 12);
+      }
+
+      tick();
+    }
+
+    revealButton.addEventListener("click", () => {
+      if (typing) {
+        return;
+      }
+
+      if (reduceType || !paragraphs.length) {
+        playRevealAnimation();
+        revealButton.textContent = "Read it again \u2661";
+        return;
+      }
+
+      playRevealAnimation();
+      typeAll();
     });
   }
 
