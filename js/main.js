@@ -226,4 +226,33 @@ document.addEventListener("DOMContentLoaded", () => {
       revealTargets.forEach((el) => observer.observe(el));
     }
   }
+
+  // "More" dropdown in the navigation.
+  document.querySelectorAll(".nav-more").forEach((more) => {
+    const toggle = more.querySelector(".nav-more-toggle");
+
+    if (!toggle) {
+      return;
+    }
+
+    toggle.addEventListener("click", (event) => {
+      event.stopPropagation();
+      const open = more.classList.toggle("is-open");
+      toggle.setAttribute("aria-expanded", String(open));
+    });
+
+    document.addEventListener("click", (event) => {
+      if (!more.contains(event.target)) {
+        more.classList.remove("is-open");
+        toggle.setAttribute("aria-expanded", "false");
+      }
+    });
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape") {
+        more.classList.remove("is-open");
+        toggle.setAttribute("aria-expanded", "false");
+      }
+    });
+  });
 });

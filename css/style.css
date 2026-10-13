@@ -988,3 +988,104 @@ h2 span {
     grid-template-columns: 1fr;
   }
 }
+
+/* Navigation: "More" dropdown */
+.nav-more {
+  position: relative;
+  display: inline-flex;
+}
+
+.nav-more-toggle {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  background: var(--panel);
+  color: var(--text);
+  font: inherit;
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.nav-more-toggle::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1.5px;
+  background: linear-gradient(120deg, var(--pink), var(--purple), #7fe0ff, #ffd27f);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  mask-composite: exclude;
+  pointer-events: none;
+  opacity: 0.8;
+}
+
+.nav-more-toggle:hover,
+.nav-more-toggle:focus-visible,
+.nav-more.is-open .nav-more-toggle {
+  color: var(--pink);
+  transform: translateY(-1px);
+}
+
+.nav-more-toggle .caret {
+  font-size: 0.7em;
+  line-height: 1;
+  transition: transform 0.2s ease;
+}
+
+.nav-more.is-open .nav-more-toggle .caret {
+  transform: rotate(180deg);
+}
+
+.nav-more-menu {
+  position: absolute;
+  top: calc(100% + 12px);
+  right: 0;
+  z-index: 60;
+  display: none;
+  flex-direction: column;
+  min-width: 200px;
+  padding: 8px;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  background: var(--bg-soft);
+  box-shadow: var(--shadow);
+}
+
+.nav-more.is-open .nav-more-menu {
+  display: flex;
+}
+
+.nav-more-menu a {
+  padding: 9px 14px;
+  border-radius: 12px;
+  color: var(--muted);
+  font-size: 0.86rem;
+  text-decoration: none;
+  transition: color 0.18s ease, background 0.18s ease;
+}
+
+.nav-more-menu a:hover,
+.nav-more-menu a:focus-visible {
+  color: var(--pink);
+  background: var(--panel);
+}
+
+@media (max-width: 680px) {
+  .nav-more {
+    width: 100%;
+  }
+
+  .nav-more-menu {
+    position: static;
+    width: 100%;
+    margin-top: 10px;
+  }
+}
