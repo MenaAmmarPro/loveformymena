@@ -4,6 +4,15 @@
 document.addEventListener("DOMContentLoaded", () => {
   const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
+  /* ---------- Service worker (PWA) ---------- */
+  if ("serviceWorker" in navigator && window.location.protocol.indexOf("http") === 0) {
+    window.addEventListener("load", () => {
+      navigator.serviceWorker.register("sw.js").catch(() => {
+        // Offline support simply stays unavailable.
+      });
+    });
+  }
+
   /* ---------- Toast ---------- */
   let toastEl = null;
   let toastTimer = 0;
