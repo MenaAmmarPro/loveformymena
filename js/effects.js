@@ -345,4 +345,8 @@ document.addEventListener("DOMContentLoaded", () => {
       progress = key === KONAMI[0] ? 1 : 0;
     }
   });
+
+  /* ---------- Shared helpers for other scripts ---------- */
+  window.fxToast = toast;
+  window.heartBurst = heartBurst;
 });

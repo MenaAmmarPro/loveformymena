@@ -81,7 +81,7 @@
 
     <section class="section">
       <p class="eyebrow">PLAY WITH ME</p>
-      <h2>Five tiny games <span>to pass the time.</span></h2>
+      <h2>Ten tiny games <span>to pass the time.</span></h2>
 
       <div class="games-grid">
         <article class="game-card">
@@ -121,7 +121,62 @@
           <div class="whack-grid" id="game-whack"></div>
           <p class="game-score">Whacked: <span id="whack-score">0</span></p>
         </article>
+
+        <article class="game-card">
+          <h3>Flappy heart</h3>
+          <p class="game-hint">Tap (or press Space) to keep the heart flying through the gaps.</p>
+          <div class="flappy-field" id="game-flappy"></div>
+          <p class="game-score">Score: <span id="flappy-score">0</span></p>
+          <p class="game-score" id="flappy-status" aria-live="polite"></p>
+        </article>
+
+        <article class="game-card">
+          <h3>2048 hearts</h3>
+          <p class="game-hint">Use the arrow keys (tap the board first) to merge tiles to 2048.</p>
+          <div class="board-2048" id="game-2048"></div>
+          <div class="game-controls">
+            <button type="button" data-2048="left" aria-label="Move left">&#8592;</button>
+            <button type="button" data-2048="up" aria-label="Move up">&#8593;</button>
+            <button type="button" data-2048="down" aria-label="Move down">&#8595;</button>
+            <button type="button" data-2048="right" aria-label="Move right">&#8594;</button>
+          </div>
+          <p class="game-score">Score: <span id="g2048-score">0</span> &middot; <button type="button" id="g2048-reset" class="game-inline-btn">New game</button></p>
+          <p class="game-score" id="g2048-status" aria-live="polite"></p>
+        </article>
+
+        <article class="game-card">
+          <h3>Constellation connect</h3>
+          <p class="game-hint">Tap the stars in order, 1 to 10, to draw a shape.</p>
+          <div class="stars-field" id="game-stars"></div>
+          <p class="game-score" id="stars-status" aria-live="polite"></p>
+        </article>
+
+        <article class="game-card">
+          <h3>Word scramble</h3>
+          <p class="game-hint">Unscramble the letters and type the word.</p>
+          <p class="scramble-word" id="scramble-word" aria-label="Scrambled word"></p>
+          <form class="scramble-form" id="scramble-form">
+            <label class="sr-only" for="scramble-input">Your answer</label>
+            <input type="text" id="scramble-input" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="Type the word">
+            <button type="submit" class="game-inline-btn">Check</button>
+          </form>
+          <p class="game-score" id="scramble-status" aria-live="polite"></p>
+        </article>
+
+        <article class="game-card">
+          <h3>Puzzle slider</h3>
+          <p class="game-hint">Slide the tiles until they read 1 to 8 in order.</p>
+          <div class="puzzle-board" id="game-puzzle"></div>
+          <p class="game-score"><button type="button" id="puzzle-reset" class="game-inline-btn">Shuffle</button> <span id="puzzle-status" aria-live="polite"></span></p>
+        </article>
       </div>
+    </section>
+
+    <section class="section">
+      <p class="eyebrow">COLLECT THEM ALL</p>
+      <h2>Little <span>badges.</span></h2>
+      <p class="section-copy">Play the games above to unlock each one. They are saved on this device.</p>
+      <div class="badge-shelf" id="badge-shelf"></div>
     </section>
   </main>
 
