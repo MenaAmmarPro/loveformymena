@@ -1089,3 +1089,60 @@ h2 span {
     margin-top: 10px;
   }
 }
+
+/* Reasons page */
+.reason-stage {
+  margin-top: 28px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.reason-text {
+  max-width: 620px;
+  margin: 0;
+  padding: 26px 28px;
+  border: 1px solid var(--line);
+  border-radius: 22px;
+  background: var(--panel);
+  box-shadow: var(--shadow);
+  color: var(--text);
+  font-size: 1.15rem;
+  line-height: 1.6;
+  text-align: center;
+}
+
+.reason-text.pop {
+  animation: reason-pop 0.45s ease;
+}
+
+@keyframes reason-pop {
+  0% {
+    transform: scale(0.96);
+    opacity: 0.4;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.reason-list {
+  list-style: none;
+  margin: 26px 0 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 12px;
+}
+
+.reason-list li {
+  padding: 14px 18px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: var(--panel);
+  color: var(--muted);
+  font-size: 0.92rem;
+  line-height: 1.5;
+}
