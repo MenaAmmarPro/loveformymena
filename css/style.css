@@ -1277,3 +1277,59 @@ h2 span {
   color: var(--muted);
   font-size: 0.9rem;
 }
+
+/* Playlist page */
+.song-pick {
+  min-height: 1.4em;
+  margin: 16px 0 0;
+  color: var(--pink);
+  font-weight: 600;
+}
+
+.song-list {
+  list-style: none;
+  margin: 26px 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.song-item {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 14px;
+  padding: 16px 20px;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: var(--panel);
+  box-shadow: var(--shadow);
+}
+
+.song-title {
+  color: var(--text);
+  font-weight: 600;
+}
+
+.song-artist {
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.song-links {
+  margin-left: auto;
+  display: inline-flex;
+  gap: 12px;
+}
+
+.song-links a {
+  color: var(--pink);
+  font-size: 0.85rem;
+  text-decoration: none;
+}
+
+.song-links a:hover,
+.song-links a:focus-visible {
+  text-decoration: underline;
+}
