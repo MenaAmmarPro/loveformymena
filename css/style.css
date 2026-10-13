@@ -136,6 +136,31 @@ a:focus-visible {
   display: none;
 }
 
+.nav-links > .github-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  padding: 0;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--panel);
+  color: var(--text);
+  transition: color 0.2s, border-color 0.2s, transform 0.2s;
+}
+
+.nav-links > .github-link:hover,
+.nav-links > .github-link:focus-visible {
+  color: var(--pink);
+  border-color: var(--pink);
+  transform: translateY(-2px);
+}
+
+.nav-links > .github-link svg {
+  display: block;
+}
+
 .hero {
   min-height: 690px;
   padding: 88px 24px 48px;
@@ -640,7 +665,8 @@ h2 span {
     font-size: 0.95rem;
   }
 
-  .theme-toggle {
+  .theme-toggle,
+  .nav-links > .github-link {
     align-self: flex-start;
   }
 
