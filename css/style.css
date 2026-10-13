@@ -2138,3 +2138,102 @@ h2 span {
     align-self: flex-start;
   }
 }
+
+/* ===== Reminder banner + footer controls ===== */
+.reminder-banner {
+  position: fixed;
+  left: 50%;
+  bottom: 18px;
+  transform: translateX(-50%);
+  z-index: 70;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  width: min(680px, calc(100vw - 24px));
+  padding: 14px 16px;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  background: var(--panel);
+  box-shadow: var(--shadow);
+  animation: reminder-in 0.4s ease both;
+}
+
+@keyframes reminder-in {
+  from { opacity: 0; transform: translate(-50%, 14px); }
+  to { opacity: 1; transform: translate(-50%, 0); }
+}
+
+.reminder-banner-text {
+  flex: 1 1 220px;
+  font-size: 0.9rem;
+  color: var(--text);
+}
+
+.reminder-banner-actions {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.reminder-banner-btn {
+  padding: 8px 14px;
+  font-size: 0.8rem;
+}
+
+.reminder-banner-dismiss {
+  width: 32px;
+  height: 32px;
+  display: grid;
+  place-items: center;
+  border: 0;
+  border-radius: 50%;
+  background: var(--bg-soft);
+  color: var(--muted);
+  font-size: 1.1rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.reminder-banner-dismiss:hover {
+  color: var(--text);
+}
+
+.footer-reminders {
+  margin-top: 10px;
+  font-size: 0.85rem;
+}
+
+.reminder-link {
+  display: inline;
+  border: 0;
+  background: none;
+  padding: 0;
+  color: var(--pink);
+  font: inherit;
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  cursor: pointer;
+}
+
+.reminder-link:hover {
+  color: var(--purple);
+}
+
+.reminder-sep {
+  margin: 0 8px;
+  color: var(--muted);
+}
+
+.reminder-status {
+  margin-left: 8px;
+  color: var(--muted);
+}
+
+@media (max-width: 680px) {
+  .reminder-banner {
+    bottom: 84px;
+  }
+}

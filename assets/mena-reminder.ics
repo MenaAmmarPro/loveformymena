@@ -1,0 +1,20 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//For Mena//Daily Reminder//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:for-mena-daily-reminder@loveformymena
+DTSTAMP:20260101T000000Z
+DTSTART:20260101T200000
+RRULE:FREQ=DAILY
+SUMMARY:Visit For Mena
+DESCRIPTION:Open our little universe: https://ammar49-cyber.github.io/loveformymena/
+URL:https://ammar49-cyber.github.io/loveformymena/
+BEGIN:VALARM
+TRIGGER:PT0M
+ACTION:DISPLAY
+DESCRIPTION:Visit For Mena
+END:VALARM
+END:VEVENT
+END:VCALENDAR

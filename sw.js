@@ -1,6 +1,6 @@
 "use strict";
 
-const CACHE = "mena-cache-v2";
+const CACHE = "mena-cache-v3";
 const ASSETS = [
   "./",
   "./index.html",
@@ -22,6 +22,7 @@ const ASSETS = [
   "./js/main.js",
   "./js/effects.js",
   "./js/i18n.js",
+  "./js/notifications.js",
   "./js/reasons.js",
   "./js/counter.js",
   "./js/playlist.js",
@@ -30,6 +31,7 @@ const ASSETS = [
   "./js/bucket.js",
   "./js/guestbook.js",
   "./js/games.js",
+  "./assets/mena-reminder.ics",
   "./assets/favicon.svg",
   "./assets/apple-touch-icon.png",
   "./assets/og-image.png",
@@ -57,6 +59,27 @@ self.addEventListener("activate", (event) => {
       )
   );
   self.clients.claim();
+});
+
+self.addEventListener("notificationclick", (event) => {
+  event.notification.close();
+  const target = event.notification.data && event.notification.data.url
+    ? event.notification.data.url
+    : self.registration.scope;
+
+  event.waitUntil(
+    self.clients.matchAll({ type: "window", includeUncontrolled: true }).then((clientList) => {
+      for (const client of clientList) {
+        if (client.url.indexOf(self.registration.scope) === 0 && "focus" in client) {
+          return client.focus();
+        }
+      }
+      if (self.clients.openWindow) {
+        return self.clients.openWindow(target);
+      }
+      return undefined;
+    })
+  );
 });
 
 self.addEventListener("fetch", (event) => {
