@@ -1146,3 +1146,72 @@ h2 span {
   font-size: 0.92rem;
   line-height: 1.5;
 }
+
+/* Open when page */
+.ow-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 16px;
+  margin-top: 26px;
+}
+
+.ow-card {
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  background: var(--panel);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+}
+
+.ow-card > summary {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 20px 22px;
+  color: var(--text);
+  font-weight: 600;
+  cursor: pointer;
+  list-style: none;
+}
+
+.ow-card > summary::-webkit-details-marker {
+  display: none;
+}
+
+.ow-card > summary .ow-emoji {
+  font-size: 1.5rem;
+}
+
+.ow-card > summary::after {
+  content: "+";
+  margin-left: auto;
+  color: var(--pink);
+  font-size: 1.3rem;
+  transition: transform 0.2s ease;
+}
+
+.ow-card[open] > summary::after {
+  transform: rotate(45deg);
+}
+
+.ow-letter {
+  padding: 0 22px 22px;
+  color: var(--muted);
+  line-height: 1.7;
+  animation: ow-in 0.35s ease;
+}
+
+.ow-letter p {
+  margin: 0;
+}
+
+@keyframes ow-in {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
