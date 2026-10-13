@@ -151,12 +151,17 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  let savedTheme = "dark";
+  let savedTheme = null;
 
   try {
-    savedTheme = localStorage.getItem("mena-theme") || "dark";
+    savedTheme = localStorage.getItem("mena-theme");
   } catch {
-    // Use dark mode by default.
+    // Choose a theme automatically below.
+  }
+
+  if (!savedTheme) {
+    const hour = new Date().getHours();
+    savedTheme = hour >= 7 && hour < 19 ? "light" : "dark";
   }
 
   setTheme(savedTheme);
