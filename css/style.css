@@ -122,39 +122,12 @@ a:focus-visible {
   color: var(--pink);
 }
 
-.theme-toggle,
-.menu-toggle {
-  color: var(--text);
-  background: var(--panel);
-  border: 1px solid var(--line);
-  border-radius: 12px;
-  padding: 7px 12px;
-  cursor: pointer;
-}
-
 .menu-toggle {
   display: none;
 }
 
 .nav-links > .github-link {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 38px;
-  height: 38px;
-  padding: 0;
-  border: 1px solid var(--line);
-  border-radius: 12px;
-  background: var(--panel);
   color: var(--text);
-  transition: color 0.2s, border-color 0.2s, transform 0.2s;
-}
-
-.nav-links > .github-link:hover,
-.nav-links > .github-link:focus-visible {
-  color: var(--pink);
-  border-color: var(--pink);
-  transform: translateY(-2px);
 }
 
 .nav-links > .github-link svg {
@@ -743,5 +716,275 @@ h2 span {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
+  }
+}
+
+/* ===== Rainbow floating pill buttons ===== */
+.button,
+.theme-toggle,
+.menu-toggle,
+.github-link,
+.back-to-top {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border: 0;
+  border-radius: 999px;
+  isolation: isolate;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+
+.button::after,
+.theme-toggle::after,
+.menu-toggle::after,
+.github-link::after,
+.back-to-top::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 2px;
+  background: linear-gradient(120deg, #ff72b8, #bba6ff, #7ee8fa, #ffd76f, #ff72b8);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+.button {
+  box-shadow: 0 10px 26px rgba(0, 0, 0, 0.28);
+}
+
+.theme-toggle,
+.menu-toggle,
+.nav-links > .github-link,
+.back-to-top {
+  padding: 8px 15px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  background: var(--panel);
+  color: var(--text);
+  box-shadow: 0 10px 26px rgba(0, 0, 0, 0.28);
+}
+
+.button:hover,
+.theme-toggle:hover,
+.menu-toggle:hover,
+.nav-links > .github-link:hover,
+.back-to-top:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 16px 34px rgba(0, 0, 0, 0.34);
+}
+
+.button:focus-visible,
+.theme-toggle:focus-visible,
+.menu-toggle:focus-visible,
+.nav-links > .github-link:focus-visible,
+.back-to-top:focus-visible {
+  outline: 2px solid var(--pink);
+  outline-offset: 3px;
+}
+
+/* ===== Back to top ===== */
+.back-to-top {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  z-index: 60;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(12px);
+}
+
+.back-to-top.is-visible {
+  opacity: 1;
+  visibility: visible;
+  transform: none;
+}
+
+/* ===== Scroll reveal ===== */
+.js-reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.js-reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* ===== 404 page and mini games ===== */
+.nf-wrap {
+  text-align: center;
+}
+
+.nf-emoji {
+  font-size: clamp(3rem, 12vw, 5rem);
+  line-height: 1;
+}
+
+.nf-emoji span {
+  display: inline-block;
+  animation: nf-bounce 2.4s ease-in-out infinite;
+}
+
+.nf-emoji span:nth-child(2) {
+  animation-delay: 0.3s;
+}
+
+.nf-emoji span:nth-child(3) {
+  animation-delay: 0.6s;
+}
+
+@keyframes nf-bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-14px); }
+}
+
+.games-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  margin-top: 24px;
+  text-align: left;
+}
+
+.game-card {
+  position: relative;
+  padding: 18px;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  background: var(--panel);
+  box-shadow: var(--shadow);
+}
+
+.game-card h3 {
+  margin: 0 0 2px;
+  font-size: 1rem;
+}
+
+.game-hint {
+  margin: 0 0 10px;
+  color: var(--muted);
+  font-size: 0.8rem;
+}
+
+.game-score {
+  color: var(--pink);
+  font-weight: 700;
+  font-size: 0.85rem;
+}
+
+.game-field {
+  position: relative;
+  height: 180px;
+  margin: 10px 0 0;
+  overflow: hidden;
+  border: 1px dashed var(--line);
+  border-radius: 12px;
+  background: rgba(0, 0, 0, 0.14);
+}
+
+.bub {
+  position: absolute;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  cursor: pointer;
+  background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.9), rgba(126, 232, 250, 0.35) 45%, rgba(187, 166, 255, 0.25));
+  border: 2px solid rgba(255, 255, 255, 0.5);
+  transition: transform 0.15s ease, opacity 0.15s ease;
+}
+
+.bub.is-popped {
+  transform: scale(1.8);
+  opacity: 0;
+}
+
+.falling-heart {
+  position: absolute;
+  font-size: 1.4rem;
+  cursor: pointer;
+  user-select: none;
+}
+
+.whack-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+
+.whack-hole {
+  height: 48px;
+  display: grid;
+  place-items: center;
+  border: 1px dashed var(--line);
+  border-radius: 12px;
+  background: rgba(0, 0, 0, 0.14);
+  font-size: 1.4rem;
+  cursor: pointer;
+}
+
+.memory-game-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+}
+
+.memory-tile {
+  aspect-ratio: 1 / 1;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--bg-soft);
+  font-size: 1.35rem;
+  color: transparent;
+  cursor: pointer;
+}
+
+.memory-tile.is-up {
+  background: var(--panel);
+  color: var(--pink);
+}
+
+.kitty {
+  font-size: 3.4rem;
+  line-height: 1;
+  text-align: center;
+  cursor: pointer;
+  user-select: none;
+  transition: transform 0.15s ease;
+}
+
+.kitty:active {
+  transform: scale(0.92);
+}
+
+.float-heart {
+  position: absolute;
+  font-size: 1.2rem;
+  animation: float-up 1s ease forwards;
+  pointer-events: none;
+}
+
+@keyframes float-up {
+  from { opacity: 1; transform: translateY(0); }
+  to { opacity: 0; transform: translateY(-46px); }
+}
+
+.game-actions {
+  margin-top: 12px;
+  text-align: center;
+}
+
+@media (max-width: 680px) {
+  .games-grid {
+    grid-template-columns: 1fr;
   }
 }

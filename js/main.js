@@ -85,7 +85,7 @@ document.addEventListener("DOMContentLoaded", () => {
     document.body.classList.toggle("light-theme", theme === "light");
 
     themeButtons.forEach((button) => {
-      button.textContent = theme === "light" ? "☾" : "☼";
+      button.textContent = theme === "light" ? "Dark theme" : "Light theme";
       button.setAttribute(
         "aria-label",
         theme === "light" ? "Switch to dark theme" : "Switch to light theme"
@@ -132,7 +132,7 @@ document.addEventListener("DOMContentLoaded", () => {
         "aria-label",
         isOpen ? "Close navigation" : "Open navigation"
       );
-      menuButton.textContent = isOpen ? "✕" : "☰";
+      menuButton.textContent = isOpen ? "Close" : "Menu";
     });
 
     navigation.querySelectorAll("a").forEach((link) => {
@@ -140,7 +140,7 @@ document.addEventListener("DOMContentLoaded", () => {
         navigation.classList.remove("is-open");
         menuButton.setAttribute("aria-expanded", "false");
         menuButton.setAttribute("aria-label", "Open navigation");
-        menuButton.textContent = "☰";
+        menuButton.textContent = "Menu";
       });
     });
   }
@@ -177,5 +177,53 @@ document.addEventListener("DOMContentLoaded", () => {
       letterContent.classList.add("is-revealing");
       revealButton.textContent = "Read it again ♡";
     });
+  }
+
+  // Floating back-to-top button.
+  const backToTop = document.createElement("button");
+  backToTop.type = "button";
+  backToTop.className = "back-to-top";
+  backToTop.textContent = "Back to top \u2191";
+  backToTop.setAttribute("aria-label", "Back to top");
+  document.body.appendChild(backToTop);
+
+  function updateBackToTop() {
+    backToTop.classList.toggle("is-visible", window.scrollY > 500);
+  }
+
+  window.addEventListener("scroll", updateBackToTop, { passive: true });
+  updateBackToTop();
+
+  backToTop.addEventListener("click", () => {
+    const smooth = !window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    window.scrollTo({ top: 0, behavior: smooth ? "smooth" : "auto" });
+  });
+
+  // Gentle scroll reveal for content blocks.
+  const revealTargets = document.querySelectorAll(
+    ".feature-card, .timeline-item, .memory-card, .section h2, .page-heading, .games-grid"
+  );
+  const prefersReduced = window.matchMedia(
+    "(prefers-reduced-motion: reduce)"
+  ).matches;
+
+  if (revealTargets.length) {
+    if (!("IntersectionObserver" in window) || prefersReduced) {
+      revealTargets.forEach((el) => el.classList.add("is-visible"));
+    } else {
+      revealTargets.forEach((el) => el.classList.add("js-reveal"));
+      const observer = new IntersectionObserver(
+        (entries, obs) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("is-visible");
+              obs.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.15 }
+      );
+      revealTargets.forEach((el) => observer.observe(el));
+    }
   }
 });
