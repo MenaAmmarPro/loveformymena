@@ -1554,3 +1554,22 @@ h2 span {
   display: block;
   margin: 22px auto 0;
 }
+
+/* Wishes wall page */
+.giscus-wrap {
+  max-width: 720px;
+  margin: 26px auto 0;
+}
+
+.giscus-note {
+  padding: 18px 22px;
+  border: 1px dashed var(--line);
+  border-radius: 16px;
+  background: var(--panel);
+  color: var(--muted);
+  text-align: center;
+}
+
+.giscus-host {
+  margin-top: 16px;
+}
