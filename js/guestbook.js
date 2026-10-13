@@ -1,14 +1,16 @@
 "use strict";
 
-// EDIT ME: after enabling GitHub Discussions and installing the giscus app
-// (see Phase 5 notes), fill in repoId and categoryId below, then the wall loads.
+// giscus is wired to GitHub Discussions on this repo.
+// The giscus GitHub App must be installed on the repo for comments to post:
+//   https://github.com/apps/giscus
+// IDs come from the GraphQL API (repository.id and discussionCategories).
 const GISCUS = {
   repo: "ammar49-cyber/loveformymena",
-  repoId: "",
+  repoId: "R_kgDOVEqXVA",
   category: "Announcements",
-  categoryId: "",
+  categoryId: "DIC_kwDOVEqXVM4DIWU9",
   mapping: "pathname",
-  theme: "dark_dimmed",
+  theme: "preferred_color_scheme",
   lang: "en"
 };
 
