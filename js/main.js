@@ -44,28 +44,80 @@ document.addEventListener("DOMContentLoaded", () => {
       drawStars(0);
     }
 
+    let shooters = [];
+
+    function spawnShooter() {
+      shooters.push({
+        x: Math.random() * width * 0.7,
+        y: Math.random() * height * 0.4,
+        vx: 4 + Math.random() * 4,
+        vy: 1.5 + Math.random() * 2.5,
+        life: 1
+      });
+    }
+
     function drawStars(time) {
       context.clearRect(0, 0, width, height);
+
+      const scrollOffset = window.scrollY || 0;
 
       for (const star of stars) {
         const pulse = reduceMotion
           ? 1
           : 0.72 + Math.sin(time * star.speed + star.phase) * 0.28;
 
+        const shifted = (star.y - scrollOffset * star.speed * 25) % height;
+        const drawY = shifted < 0 ? shifted + height : shifted;
+
         context.beginPath();
-        context.arc(
-          star.x,
-          star.y,
-          star.radius,
-          0,
-          Math.PI * 2
-        );
+        context.arc(star.x, drawY, star.radius, 0, Math.PI * 2);
 
         context.fillStyle = `rgba(255, 239, 255, ${star.alpha * pulse})`;
         context.fill();
       }
 
       if (!reduceMotion) {
+        if (Math.random() < 0.004 && shooters.length < 3) {
+          spawnShooter();
+        }
+
+        for (let i = shooters.length - 1; i >= 0; i -= 1) {
+          const shooter = shooters[i];
+          shooter.x += shooter.vx;
+          shooter.y += shooter.vy;
+          shooter.life -= 0.012;
+
+          const tail = context.createLinearGradient(
+            shooter.x,
+            shooter.y,
+            shooter.x - shooter.vx * 12,
+            shooter.y - shooter.vy * 12
+          );
+          tail.addColorStop(
+            0,
+            `rgba(255, 240, 255, ${Math.max(shooter.life, 0)})`
+          );
+          tail.addColorStop(1, "rgba(255, 240, 255, 0)");
+
+          context.strokeStyle = tail;
+          context.lineWidth = 1.6;
+          context.beginPath();
+          context.moveTo(shooter.x, shooter.y);
+          context.lineTo(
+            shooter.x - shooter.vx * 12,
+            shooter.y - shooter.vy * 12
+          );
+          context.stroke();
+
+          if (
+            shooter.life <= 0 ||
+            shooter.x > width + 120 ||
+            shooter.y > height + 120
+          ) {
+            shooters.splice(i, 1);
+          }
+        }
+
         animationFrame = window.requestAnimationFrame(drawStars);
       }
     }

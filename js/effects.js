@@ -223,6 +223,97 @@ document.addEventListener("DOMContentLoaded", () => {
     reasonToday.textContent = REASONS[dayOfYear % REASONS.length];
   }
 
+  /* ---------- Page transitions ---------- */
+  if (!reduce) {
+    document.body.classList.add("page-in");
+
+    document.addEventListener("click", (event) => {
+      const link = event.target.closest("a");
+
+      if (
+        !link ||
+        event.defaultPrevented ||
+        event.button !== 0 ||
+        event.metaKey ||
+        event.ctrlKey ||
+        event.shiftKey ||
+        link.target === "_blank" ||
+        link.hasAttribute("download")
+      ) {
+        return;
+      }
+
+      const href = link.getAttribute("href");
+
+      if (
+        !href ||
+        href.charAt(0) === "#" ||
+        href.indexOf("http") === 0 ||
+        href.indexOf("mailto:") === 0
+      ) {
+        return;
+      }
+
+      event.preventDefault();
+      document.body.classList.add("page-out");
+      window.setTimeout(() => {
+        window.location.href = href;
+      }, 240);
+    });
+  }
+
+  /* ---------- 3D card tilt ---------- */
+  if (canHover && !reduce) {
+    document.querySelectorAll(".feature-card, .memory-card").forEach((card) => {
+      card.addEventListener("mousemove", (event) => {
+        const rect = card.getBoundingClientRect();
+        const px = (event.clientX - rect.left) / rect.width - 0.5;
+        const py = (event.clientY - rect.top) / rect.height - 0.5;
+
+        card.style.transform =
+          "perspective(700px) rotateX(" +
+          (-py * 6).toFixed(2) +
+          "deg) rotateY(" +
+          (px * 6).toFixed(2) +
+          "deg) translateY(-2px)";
+      });
+
+      card.addEventListener("mouseleave", () => {
+        card.style.transform = "";
+      });
+    });
+  }
+
+  /* ---------- Loading splash (once per session) ---------- */
+  let splashSeen = false;
+
+  try {
+    splashSeen = sessionStorage.getItem("mena-splash") === "1";
+  } catch {
+    // Ignore storage errors.
+  }
+
+  if (!splashSeen && !reduce) {
+    try {
+      sessionStorage.setItem("mena-splash", "1");
+    } catch {
+      // Ignore storage errors.
+    }
+
+    const splash = document.createElement("div");
+    splash.className = "fx-splash";
+    splash.setAttribute("aria-hidden", "true");
+
+    const heart = document.createElement("span");
+    heart.className = "fx-splash-heart";
+    heart.textContent = "\u2665";
+    splash.appendChild(heart);
+    document.body.appendChild(splash);
+
+    window.setTimeout(() => splash.classList.add("is-hiding"), 850);
+    window.setTimeout(() => splash.remove(), 1500);
+  }
+
   /* ---------- Easter egg ---------- */
   const KONAMI = [
     "ArrowUp", "ArrowUp", "ArrowDown", "ArrowDown",
