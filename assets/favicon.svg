@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="For Mena">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="32%" r="78%">
+      <stop offset="0%" stop-color="#1a1d43"/>
+      <stop offset="100%" stop-color="#090b20"/>
+    </radialGradient>
+  </defs>
+  <rect width="64" height="64" rx="15" fill="url(#bg)"/>
+  <path d="M32 11.5 L36.7 26 L51.5 27 L39.6 36.4 L43.7 51.5 L32 42.6 L20.3 51.5 L24.4 36.4 L12.5 27 L27.3 26 Z" fill="#ff9fcf"/>
+  <circle cx="48" cy="16.5" r="2.4" fill="#bba6ff"/>
+  <circle cx="15.5" cy="47" r="1.8" fill="#ff72b8"/>
+</svg>
