@@ -1,0 +1,70 @@
+name: Wishes wall notifications
+
+# Notifies Mena when someone leaves a comment on the wishes wall
+# (which is backed by GitHub Discussions via giscus).
+#
+# How it works: every message is optional and skipped unless the matching
+# repository secret is set (Settings -> Secrets and variables -> Actions).
+#
+#   Email alerts need:  MAIL_USERNAME, MAIL_PASSWORD, MAIL_TO
+#                       optional: MAIL_SERVER (default smtp.gmail.com), MAIL_PORT (587), MAIL_FROM
+#   Phone push needs:   ONESIGNAL_APP_ID, ONESIGNAL_AUTH
+#                       (ONESIGNAL_AUTH = "Key <your OneSignal REST API key>")
+#
+# If no secrets are set, the workflow simply does nothing (it won't fail).
+#
+# Note: the secrets context can't be used directly in `if:` conditions, so we
+# resolve booleans once at the job level and test those env values instead.
+
+on:
+  discussion_comment:
+    types: [created]
+
+permissions:
+  contents: read
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    env:
+      HAS_MAIL: ${{ secrets.MAIL_USERNAME != '' && secrets.MAIL_PASSWORD != '' && secrets.MAIL_TO != '' }}
+      HAS_PUSH: ${{ secrets.ONESIGNAL_APP_ID != '' && secrets.ONESIGNAL_AUTH != '' }}
+    steps:
+      - name: Send email to Mena
+        if: env.HAS_MAIL == 'true'
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: ${{ secrets.MAIL_SERVER || 'smtp.gmail.com' }}
+          server_port: ${{ secrets.MAIL_PORT || '587' }}
+          username: ${{ secrets.MAIL_USERNAME }}
+          password: ${{ secrets.MAIL_PASSWORD }}
+          subject: "New wish on the wall from ${{ github.event.comment.user.login }}"
+          to: ${{ secrets.MAIL_TO }}
+          from: ${{ secrets.MAIL_FROM || secrets.MAIL_USERNAME }}
+          body: |
+            A new comment was left on the wishes wall.
+
+            From:  ${{ github.event.comment.user.login }}
+            Wall:  ${{ github.event.discussion.title }}
+            Link:  ${{ github.event.comment.html_url }}
+
+            Comment:
+            ${{ github.event.comment.body }}
+
+      - name: Push to Mena's phone (OneSignal)
+        if: env.HAS_PUSH == 'true'
+        env:
+          ONESIGNAL_APP_ID: ${{ secrets.ONESIGNAL_APP_ID }}
+          ONESIGNAL_AUTH: ${{ secrets.ONESIGNAL_AUTH }}
+          AUTHOR: ${{ github.event.comment.user.login }}
+          LINK: ${{ github.event.comment.html_url }}
+        run: |
+          curl -sS -X POST "https://onesignal.com/api/v1/notifications" \
+            -H "Content-Type: application/json" \
+            -H "Authorization: ${ONESIGNAL_AUTH}" \
+            -d "$(jq -n \
+              --arg app "${ONESIGNAL_APP_ID}" \
+              --arg title "New wish on the wall" \
+              --arg body "From ${AUTHOR}" \
+              --arg url "${LINK}" \
+              '{app_id:$app, included_segments:["Subscribed Users"], headings:{en:$title}, contents:{en:$body}, url:$url}')"
