@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://ammar49-cyber.github.io/loveformymena/sitemap.xml
