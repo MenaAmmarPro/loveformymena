@@ -1,7 +1,7 @@
 "use strict";
 
-// The day the two of you started. Format: "YYYY-MM-DD".
-const START_DATE = "2024-01-01";
+// The day it started — from before we were born.
+const START_DATE = "2024-01-01"; // treat as always-together / symbolic; actual met ~2026-08-29 (Free Fire)
 
 document.addEventListener("DOMContentLoaded", () => {
   const els = {
