@@ -110,12 +110,7 @@ document.addEventListener("DOMContentLoaded", () => {
   music.className = "float-btn";
   music.textContent = "Music";
   music.setAttribute("aria-label", "Play background music");
-  music.setAttribute("title", "Background music");
-
-  const audio = new Audio("assets/music/our-song.mp3");
-  audio.loop = true;
-  audio.volume = 0.55;
-  audio.preload = "none";
+  music.setAttribute("title", "Background music (generated live)");
 
   function setMusicLabel(playing) {
     music.textContent = playing ? "Mute" : "Music";
@@ -126,25 +121,26 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   music.addEventListener("click", () => {
-    if (audio.paused) {
-      audio
-        .play()
-        .then(() => {
-          setMusicLabel(true);
-          try {
-            localStorage.setItem("mena-music", "on");
-          } catch {
-            // Ignore storage errors.
-          }
-        })
-        .catch(() => {
-          toast("Add assets/music/our-song.mp3 to play music");
-        });
-    } else {
-      audio.pause();
+    const engine = window.MenaMusic;
+
+    if (!engine || !engine.supported()) {
+      toast("This browser cannot play the generated music");
+      return;
+    }
+
+    if (engine.isPlaying(engine.AMBIENT.id)) {
+      engine.stop();
       setMusicLabel(false);
       try {
         localStorage.setItem("mena-music", "off");
+      } catch {
+        // Ignore storage errors.
+      }
+    } else {
+      engine.play(engine.AMBIENT);
+      setMusicLabel(true);
+      try {
+        localStorage.setItem("mena-music", "on");
       } catch {
         // Ignore storage errors.
       }
@@ -182,10 +178,21 @@ document.addEventListener("DOMContentLoaded", () => {
   stack.appendChild(share);
   document.body.appendChild(stack);
 
-  // Resume music on later pages if it was left on (best effort).
+  // If music was left on, start it on the next interaction (browsers only
+  // allow audio to begin after a gesture).
   try {
     if (localStorage.getItem("mena-music") === "on") {
-      audio.play().then(() => setMusicLabel(true)).catch(() => {});
+      document.addEventListener(
+        "pointerdown",
+        () => {
+          const engine = window.MenaMusic;
+          if (engine && engine.supported() && !engine.playingId()) {
+            engine.play(engine.AMBIENT);
+            setMusicLabel(true);
+          }
+        },
+        { once: true }
+      );
     }
   } catch {
     // Ignore storage errors.

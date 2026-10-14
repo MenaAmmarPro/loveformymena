@@ -1,6 +1,6 @@
 "use strict";
 
-const CACHE = "mena-cache-v3";
+const CACHE = "mena-cache-v4";
 const ASSETS = [
   "./",
   "./index.html",
@@ -20,6 +20,7 @@ const ASSETS = [
   "./404.html",
   "./css/style.css",
   "./js/main.js",
+  "./js/music.js",
   "./js/effects.js",
   "./js/i18n.js",
   "./js/notifications.js",
