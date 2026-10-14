@@ -1,36 +1,46 @@
 "use strict";
 
-// EDIT ME: change the questions, options, and the correct answer index (0, 1, 2...).
+// Personalise these to your own story whenever you like.
 const QUIZ = [
   {
-    q: "Where did we first meet?",
-    options: ["Edit this answer", "Edit this answer", "Edit this answer"],
-    answer: 0
-  },
-  {
-    q: "What is our favorite thing to do together?",
-    options: ["Edit this answer", "Edit this answer", "Edit this answer"],
+    q: "What is my favourite place in the world?",
+    options: ["A faraway island", "Wherever you are", "The top of a mountain"],
     answer: 1
   },
   {
-    q: "What was the first film or series we watched together?",
-    options: ["Edit this answer", "Edit this answer", "Edit this answer"],
+    q: "What sound do I never get tired of?",
+    options: ["Your laugh", "City traffic", "A ringing phone"],
     answer: 0
   },
   {
-    q: "If we could travel anywhere right now, where would we go?",
-    options: ["Edit this answer", "Edit this answer", "Edit this answer"],
+    q: "What do I notice first every time I see you?",
+    options: ["The weather", "My phone", "Your smile"],
     answer: 2
   },
   {
-    q: "What is my favorite small thing about you?",
-    options: ["Edit this answer", "Edit this answer", "Edit this answer"],
+    q: "What is my favourite time of day with you?",
+    options: ["Rush hour", "Late-night talks", "Monday mornings"],
     answer: 1
   },
   {
-    q: "What do I order every single time?",
-    options: ["Edit this answer", "Edit this answer", "Edit this answer"],
+    q: "What do I think about when I cannot sleep?",
+    options: ["Our next adventure", "Work emails", "Nothing at all"],
     answer: 0
+  },
+  {
+    q: "If I could replay one moment forever, which would it be?",
+    options: ["A boring Tuesday", "The alarm clock", "The first time you said you loved me"],
+    answer: 2
+  },
+  {
+    q: "What always makes a bad day better?",
+    options: ["One message from you", "Winning the lottery", "A long meeting"],
+    answer: 0
+  },
+  {
+    q: "What do I want most for us?",
+    options: ["A quick goodbye", "A long, gentle forever", "A crowded room"],
+    answer: 1
   }
 ];
 

@@ -1,13 +1,29 @@
 "use strict";
 
-// EDIT ME: the starter bucket list shown the first time you open the page.
+// The starter bucket list shown the first time you open the page.
 const STARTER_BUCKET = [
   "Watch the sunrise together",
   "Take a photo in every city we visit",
   "Cook a whole meal together",
   "Dance in the kitchen at midnight",
   "See the stars away from the city lights",
-  "Write each other a letter to open in a year"
+  "Write each other a letter to open in a year",
+  "Take a slow road trip with no fixed plan",
+  "Learn to make each other's favourite meal",
+  "Fall asleep under the stars at least once",
+  "Start a tiny tradition just for the two of us",
+  "Plant something and watch it grow together",
+  "Take a class in something we are both bad at",
+  "Watch the sunrise every day for a whole week",
+  "Build a blanket fort and stay in it all day",
+  "Make a playlist that is only ours",
+  "Go somewhere neither of us has ever been",
+  "Take silly photos in a photo booth",
+  "Read the same book and talk about it after",
+  "Have a picnic in the rain anyway",
+  "Dance in the kitchen at midnight, again",
+  "Write down our favourite day, then relive it",
+  "Grow old together and still hold hands"
 ];
 
 const STORAGE_KEY = "mena-bucket-list";

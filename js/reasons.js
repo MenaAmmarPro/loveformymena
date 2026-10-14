@@ -1,7 +1,7 @@
 "use strict";
 
-// EDIT ME: add, remove, or change the reasons below.
 // Each line is one reason shown in the list and in the "Tell me another" button.
+// Add, remove, or reword them whenever you like.
 const REASONS = [
   "The way you smile when you think no one is looking.",
   "How a boring day turns gentle the moment we talk.",
@@ -42,7 +42,32 @@ const REASONS = [
   "Your everything. Yes, everything.",
   "How you make forever sound too short.",
   "The way you are simply, completely you.",
-  "Because you are Mena. That is the whole reason."
+  "Because you are Mena. That is the whole reason.",
+  "How you make me laugh in the middle of a serious moment.",
+  "The way you say \u201cwe\u201d without even thinking about it.",
+  "Your handwriting, even the messy parts.",
+  "How you send me things that made you think of me.",
+  "The way you go quiet when you are happy.",
+  "How you never, ever make me feel small.",
+  "The way you cheer for my smallest wins.",
+  "How you fit into every plan I make.",
+  "The way you look up at the sky.",
+  "Your habit of humming without noticing.",
+  "How you make time for the people you love.",
+  "The way you apologize \u2014 soft and honest.",
+  "How you keep our little traditions alive.",
+  "The way you fall asleep mid-sentence.",
+  "How you trust me with the quiet parts.",
+  "The way you say \u201ccome here.\u201d",
+  "Your courage to begin again.",
+  "How you make me feel chosen, every single day.",
+  "The way you love with your whole heart.",
+  "How one message from you can fix a whole day.",
+  "The way you are gentle with animals.",
+  "Your terrible, wonderful puns.",
+  "How you always give me the better seat.",
+  "The way you hold my face just to look at me.",
+  "Because a life with you is the only one I want."
 ];
 
 document.addEventListener("DOMContentLoaded", () => {
