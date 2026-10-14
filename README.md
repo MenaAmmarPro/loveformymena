@@ -4,7 +4,7 @@
 A little corner of the universe, made with love for Mena — a personal
 romantic website built with plain HTML, CSS, and vanilla JavaScript.
 
-**Live site:** https://ammar49-cyber.github.io/loveformymena/
+**Live site:** https://menaammarpro.github.io/loveformymena/
 
 ## Features
 
@@ -106,4 +106,4 @@ Released under the [Creative Commons Attribution-NonCommercial-NoDerivatives
 license — you may share the work with attribution, but not for commercial use
 and not as a modified version. See [`LICENSE`](LICENSE).
 
-© 2026 Ammar (ammar49-cyber). All personal content is shared with care.
+© 2026 Ammar (MenaAmmarPro). All personal content is shared with care.

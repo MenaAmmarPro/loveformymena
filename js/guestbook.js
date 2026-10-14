@@ -5,7 +5,7 @@
 //   https://github.com/apps/giscus
 // IDs come from the GraphQL API (repository.id and discussionCategories).
 const GISCUS = {
-  repo: "ammar49-cyber/loveformymena",
+  repo: "MenaAmmarPro/loveformymena",
   repoId: "R_kgDOVEqXVA",
   category: "Announcements",
   categoryId: "DIC_kwDOVEqXVM4DIWU9",
