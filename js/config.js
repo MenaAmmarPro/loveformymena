@@ -13,5 +13,5 @@
  * (giscus) instead.
  */
 window.MENA_CONFIG = {
-  wishesApi: ""
+  wishesApi: "https://love-api.ammarirfan595.workers.dev"
 };
