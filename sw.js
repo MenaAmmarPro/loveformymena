@@ -1,6 +1,6 @@
 "use strict";
 
-const CACHE = "mena-cache-v5";
+const CACHE = "mena-cache-v6";
 const ASSETS = [
   "./",
   "./index.html",
