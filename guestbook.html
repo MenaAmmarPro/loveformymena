@@ -24,10 +24,10 @@
   <meta name="twitter:image" content="https://menaammarpro.github.io/loveformymena/assets/og-image.png">
   <link rel="stylesheet" href="css/style.css">
   <script src="js/main.js" defer></script>
+  <script src="js/config.js" defer></script>
   <script src="js/guestbook.js" defer></script>
   <script src="js/music.js" defer></script>
   <script src="js/effects.js" defer></script>
-  <script src="js/i18n.js" defer></script>
   <script src="js/notifications.js" defer></script>
   <link rel="manifest" href="manifest.webmanifest">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -80,8 +80,35 @@
         Mena reads these.
       </p>
 
-      <div class="giscus-wrap">
-        <p class="giscus-note" id="giscus-note" hidden>
+      <form class="wish-form" id="wish-form" novalidate>
+        <div class="wish-fields">
+          <label class="wish-field">
+            <span>Your name <em>(optional)</em></span>
+            <input id="wish-name" name="name" type="text" maxlength="40" autocomplete="name" placeholder="Someone who cares">
+          </label>
+          <label class="wish-field">
+            <span>Your wish</span>
+            <textarea id="wish-message" name="message" rows="3" maxlength="280" required placeholder="Write something kind&hellip;"></textarea>
+          </label>
+        </div>
+        <label class="wish-honeypot" aria-hidden="true">Please leave this field empty
+          <input id="wish-website" name="website" type="text" tabindex="-1" autocomplete="off">
+        </label>
+        <div class="wish-actions">
+          <button class="button button-primary" id="wish-submit" type="submit">Hang my wish &#10022;</button>
+          <span class="wish-status" id="wish-status" role="status" aria-live="polite"></span>
+        </div>
+      </form>
+
+      <div class="wish-list-head">
+        <h2 class="wish-list-title">On the wall</h2>
+        <button class="wish-refresh" id="wish-refresh" type="button">Refresh</button>
+      </div>
+      <ul class="wish-list" id="wish-list" aria-live="polite"></ul>
+      <p class="wish-empty" id="wish-empty" hidden>No wishes yet &mdash; be the first to leave one.</p>
+
+      <div class="giscus-wrap" id="giscus-fallback" hidden>
+        <p class="giscus-note" id="giscus-note">
           The wishes wall is warming up. Comments will appear here shortly.
         </p>
         <div class="giscus-host" id="giscus-host"></div>

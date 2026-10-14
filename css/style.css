@@ -1826,6 +1826,150 @@ h2 span {
   margin-top: 16px;
 }
 
+/* Wishes wall: the self-hosted form + list (love-api) */
+.wish-form {
+  max-width: 640px;
+  margin: 30px auto 0;
+  padding: 22px 22px 18px;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  background: var(--panel);
+  box-shadow: var(--shadow);
+}
+
+.wish-fields {
+  display: grid;
+  gap: 14px;
+}
+
+.wish-field {
+  display: grid;
+  gap: 6px;
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+
+.wish-field em {
+  font-style: normal;
+  opacity: 0.7;
+}
+
+.wish-field input,
+.wish-field textarea {
+  width: 100%;
+  padding: 11px 14px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--bg-soft);
+  color: var(--text);
+  font: inherit;
+  resize: vertical;
+}
+
+.wish-field input:focus,
+.wish-field textarea:focus {
+  outline: 2px solid var(--pink);
+  outline-offset: 1px;
+}
+
+.wish-honeypot {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+.wish-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 14px;
+  margin-top: 16px;
+}
+
+.wish-status {
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+
+.wish-status[data-tone="ok"] {
+  color: var(--pink);
+}
+
+.wish-status[data-tone="error"] {
+  color: var(--pink-strong);
+}
+
+.wish-list-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  max-width: 720px;
+  margin: 40px auto 0;
+}
+
+.wish-list-title {
+  margin: 0;
+  font-size: 1.15rem;
+}
+
+.wish-refresh {
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--muted);
+  padding: 6px 14px;
+  font: inherit;
+  cursor: pointer;
+}
+
+.wish-refresh:hover {
+  color: var(--text);
+  border-color: var(--pink);
+}
+
+.wish-list {
+  max-width: 720px;
+  margin: 16px auto 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 12px;
+}
+
+.wish-card {
+  padding: 15px 18px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: var(--panel);
+}
+
+.wish-card p {
+  margin: 0 0 8px;
+  line-height: 1.55;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.wish-card footer {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+
+.wish-empty {
+  max-width: 720px;
+  margin: 18px auto 0;
+  color: var(--muted);
+  text-align: center;
+}
+
+
 /* Effects: toast, hearts, sparkles, floating buttons */
 .fx-toast {
   position: fixed;
@@ -2085,57 +2229,6 @@ h2 span {
   50% {
     transform: scale(1.25);
     opacity: 1;
-  }
-}
-
-/* ===== Language toggle (i18n scaffold) ===== */
-.lang-toggle {
-  position: relative;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  padding: 8px 15px;
-  border: 0;
-  border-radius: 999px;
-  isolation: isolate;
-  cursor: pointer;
-  background: var(--panel);
-  color: var(--text);
-  font: inherit;
-  font-size: 0.85rem;
-  font-weight: 700;
-  box-shadow: 0 10px 26px rgba(0, 0, 0, 0.28);
-  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
-}
-
-.lang-toggle::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  padding: 2px;
-  background: linear-gradient(120deg, #ff72b8, #bba6ff, #7ee8fa, #ffd76f, #ff72b8);
-  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
-  -webkit-mask-composite: xor;
-  mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
-  mask-composite: exclude;
-  pointer-events: none;
-}
-
-.lang-toggle:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 16px 34px rgba(0, 0, 0, 0.34);
-}
-
-.lang-toggle:focus-visible {
-  outline: 2px solid var(--pink);
-  outline-offset: 3px;
-}
-
-@media (max-width: 680px) {
-  .lang-toggle {
-    align-self: flex-start;
   }
 }
 
