@@ -1,6 +1,6 @@
 "use strict";
 
-// EDIT ME: the day the two of you started. Format: "YYYY-MM-DD".
+// The day the two of you started. Format: "YYYY-MM-DD".
 const START_DATE = "2024-01-01";
 
 document.addEventListener("DOMContentLoaded", () => {
