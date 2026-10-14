@@ -17,9 +17,9 @@ romantic website built with plain HTML, CSS, and vanilla JavaScript.
 - Extra pages: reasons, open-when letters, day counter, playlist, quiz,
   fortune cookie, bucket list, wishes wall, and a "for you" hub
 - Ten mini-games (404 page) with unlockable badges
-- Wishes wall powered by giscus + GitHub Discussions
+- Wishes wall powered by a self-hosted Cloudflare Worker
+  ([love-api](https://github.com/MenaAmmarPro/love-api)), with a giscus fallback
 - Daily reminders (calendar, browser notifications, optional push)
-- Language toggle scaffold (`data-i18n` hooks)
 - Installable PWA with offline support
 - SEO: sitemap, robots, Open Graph / Twitter preview
 - No framework or build step required
@@ -36,7 +36,7 @@ romantic website built with plain HTML, CSS, and vanilla JavaScript.
   `quiz.html`, `fortune.html`, `bucket.html`, `guestbook.html` — extra pages
 - `404.html` — not-found page with mini-games
 - `css/style.css` — shared styles
-- `js/main.js`, `js/effects.js`, `js/i18n.js`, `js/notifications.js` — core scripts
+- `js/main.js`, `js/config.js`, `js/effects.js`, `js/notifications.js` — core scripts
 - `js/reasons.js`, `js/counter.js`, `js/playlist.js`, `js/quiz.js`,
   `js/fortune.js`, `js/bucket.js`, `js/guestbook.js`, `js/games.js` — page scripts
 - `sw.js`, `manifest.webmanifest` — PWA
@@ -55,6 +55,27 @@ py -m http.server 8000
 Then visit http://localhost:8000.
 
 Press Ctrl+C in the terminal to stop the server.
+
+## Wishes wall
+
+The wishes wall works best with its own backend, so anyone can post a wish
+without needing a GitHub account. It is served by the
+[love-api](https://github.com/MenaAmmarPro/love-api) Cloudflare Worker
+(Workers + KV — free).
+
+To enable it:
+
+1. Deploy `love-api` (see its README) and copy the Worker URL.
+2. Paste it into `js/config.js`:
+
+   ```js
+   window.MENA_CONFIG = { wishesApi: "https://love-api.<your-subdomain>.workers.dev" };
+   ```
+
+3. Reload the page — wishes save instantly and show newest first.
+
+If `wishesApi` is empty (or the Worker can't be reached), the page falls back
+to [giscus](https://giscus.app) over GitHub Discussions, so the wall still works.
 
 ## Notifications
 
@@ -76,9 +97,10 @@ Three ways, all optional — controls live in the site footer:
 
 Returning after a day away also shows a gentle banner.
 
-### Comment alerts (when someone leaves a wish)
+### Wish alerts (when someone leaves a wish)
 
-Comments are GitHub Discussions (via giscus). Notification options:
+With the Worker backend, wishes live in Cloudflare KV; with the giscus
+fallback they live in GitHub Discussions. Notification options:
 
 - **GitHub email (simplest)** — Mena makes a GitHub account and clicks
   **Watch** on this repository (or subscribes to the discussion). GitHub
