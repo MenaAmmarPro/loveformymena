@@ -2237,3 +2237,105 @@ h2 span {
     bottom: 84px;
   }
 }
+
+/* ===== Generated playlist controls (js/music.js) ===== */
+.song-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.song-actions {
+  margin-left: auto;
+  display: inline-flex;
+  gap: 8px;
+}
+
+.song-play,
+.song-download {
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 7px 16px;
+  background: transparent;
+  color: var(--text);
+  font: inherit;
+  font-weight: 600;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: transform 0.15s ease, background 0.2s ease, color 0.2s ease;
+}
+
+.song-play {
+  border-color: transparent;
+  background: linear-gradient(135deg, var(--pink), var(--purple));
+  color: #fff;
+}
+
+.song-play:hover,
+.song-download:hover {
+  transform: translateY(-1px);
+}
+
+.song-play:disabled,
+.song-download:disabled {
+  opacity: 0.6;
+  cursor: default;
+  transform: none;
+}
+
+/* ===== Generated memory art (no photos needed) ===== */
+.memory-placeholder {
+  background-size: 160% 160%;
+  animation: memory-drift 14s ease-in-out infinite alternate;
+}
+
+.memory-card:nth-child(1) .memory-placeholder {
+  background:
+    radial-gradient(circle at 28% 24%, rgba(255, 159, 207, 0.4), transparent 55%),
+    linear-gradient(150deg, #2a2350, #12152c);
+}
+
+.memory-card:nth-child(2) .memory-placeholder {
+  background:
+    radial-gradient(circle at 72% 28%, rgba(180, 140, 255, 0.42), transparent 55%),
+    linear-gradient(150deg, #33235a, #141026);
+}
+
+.memory-card:nth-child(3) .memory-placeholder {
+  background:
+    radial-gradient(circle at 30% 72%, rgba(255, 214, 153, 0.34), transparent 55%),
+    linear-gradient(150deg, #3a2b46, #161026);
+}
+
+.memory-card:nth-child(4) .memory-placeholder {
+  background:
+    radial-gradient(circle at 70% 70%, rgba(140, 196, 255, 0.34), transparent 55%),
+    linear-gradient(150deg, #202b52, #101528);
+}
+
+.memory-card:nth-child(5) .memory-placeholder {
+  background:
+    radial-gradient(circle at 50% 22%, rgba(130, 220, 205, 0.3), transparent 55%),
+    linear-gradient(150deg, #17343a, #0d1a24);
+}
+
+.memory-card:nth-child(6) .memory-placeholder {
+  background:
+    radial-gradient(circle at 50% 78%, rgba(255, 130, 170, 0.36), transparent 55%),
+    linear-gradient(150deg, #3a1f37, #170f22);
+}
+
+@keyframes memory-drift {
+  from {
+    background-position: 0% 0%;
+  }
+  to {
+    background-position: 100% 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .memory-placeholder {
+    animation: none;
+  }
+}
